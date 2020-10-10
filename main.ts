@@ -164,10 +164,15 @@ control.inBackground(function () {
         LCD1IN8.DisString(
         50,
         40,
-        heading,
+        magneticForce,
         LCD1IN8.Get_Color(LCD_COLOR.RED)
         )
-        LCD1IN8.LCD_Display()
+        LCD1IN8.LCD_DisplayWindows(
+        50,
+        40,
+        160,
+        50
+        )
         basic.pause(100)
     }
 })
