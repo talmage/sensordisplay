@@ -39,6 +39,8 @@ let heading = rightJustifyNumber(input.compassHeading(), 3)
 let lumens = rightJustifyNumber(input.lightLevel(), 3)
 let magneticForce = rightJustifyNumber(input.magneticForce(Dimension.Strength), 8)
 magneticForce = rightJustifyNumber(input.magneticForce(Dimension.Strength), 3)
+let pitch = rightJustifyNumber(input.rotation(Rotation.Pitch), 4)
+let roll = rightJustifyNumber(input.rotation(Rotation.Roll), 4)
 let temp = rightJustifyNumber(input.temperature(), 3)
 LCD1IN8.DisString(
 0,
@@ -98,6 +100,30 @@ LCD1IN8.DisString(
 50,
 40,
 magneticForce,
+LCD1IN8.Get_Color(LCD_COLOR.RED)
+)
+LCD1IN8.DisString(
+0,
+50,
+"pitch:",
+LCD1IN8.Get_Color(LCD_COLOR.BLACK)
+)
+LCD1IN8.DisString(
+50,
+50,
+pitch,
+LCD1IN8.Get_Color(LCD_COLOR.RED)
+)
+LCD1IN8.DisString(
+0,
+60,
+"roll: ",
+LCD1IN8.Get_Color(LCD_COLOR.BLACK)
+)
+LCD1IN8.DisString(
+50,
+60,
+roll,
 LCD1IN8.Get_Color(LCD_COLOR.RED)
 )
 LCD1IN8.LCD_Display()
@@ -172,6 +198,57 @@ control.inBackground(function () {
         40,
         160,
         50
+        )
+        basic.pause(100)
+    }
+})
+// Poll the pitch sensor
+//  every 100ms and update the display.
+control.inBackground(function () {
+    while (true) {
+        LCD1IN8.DisString(
+        50,
+        50,
+        pitch,
+        LCD1IN8.Get_Color(LCD_COLOR.WHITE)
+        )
+        pitch = rightJustifyNumber(input.rotation(Rotation.Pitch), 4)
+        LCD1IN8.DisString(
+        50,
+        50,
+        pitch,
+        LCD1IN8.Get_Color(LCD_COLOR.RED)
+        )
+        LCD1IN8.LCD_DisplayWindows(
+        50,
+        50,
+        90,
+        50
+        )
+        basic.pause(100)
+    }
+})
+// Poll the roll sensor every 100ms and update the display.
+control.inBackground(function () {
+    while (true) {
+        LCD1IN8.DisString(
+        50,
+        60,
+        roll,
+        LCD1IN8.Get_Color(LCD_COLOR.WHITE)
+        )
+        roll = rightJustifyNumber(input.rotation(Rotation.Roll), 4)
+        LCD1IN8.DisString(
+        50,
+        60,
+        roll,
+        LCD1IN8.Get_Color(LCD_COLOR.RED)
+        )
+        LCD1IN8.LCD_DisplayWindows(
+        50,
+        60,
+        90,
+        60
         )
         basic.pause(100)
     }
