@@ -1,7 +1,3 @@
-control.onEvent(EventBusSource.MICROBIT_ID_BUTTON_A, EventBusValue.MICROBIT_BUTTON_EVT_CLICK, function () {
-    basic.clearScreen()
-    basic.showString(magneticForce)
-})
 // Return the string representation of a number padded on the left with zeroes.
 function rightJustifyNumber (num: number, length: number) {
     answer = convertToText(num)
@@ -33,7 +29,6 @@ control.onEvent(EventBusSource.MICROBIT_ID_ACCELEROMETER, EventBusValue.MICROBIT
     )
 })
 let answer = ""
-let magneticForce = ""
 let accel = ""
 input.calibrateCompass()
 LCD1IN8.LCD_Init()
@@ -42,7 +37,8 @@ LCD1IN8.LCD_SetBL(123)
 accel = rightJustifyNumber(input.acceleration(Dimension.Strength), 4)
 let heading = rightJustifyNumber(input.compassHeading(), 3)
 let lumens = rightJustifyNumber(input.lightLevel(), 3)
-magneticForce = rightJustifyNumber(input.magneticForce(Dimension.Strength), 8)
+let magneticForce = rightJustifyNumber(input.magneticForce(Dimension.Strength), 8)
+magneticForce = rightJustifyNumber(input.magneticForce(Dimension.Strength), 3)
 let temp = rightJustifyNumber(input.temperature(), 3)
 LCD1IN8.DisString(
 0,
@@ -171,12 +167,7 @@ control.inBackground(function () {
         heading,
         LCD1IN8.Get_Color(LCD_COLOR.RED)
         )
-        LCD1IN8.LCD_DisplayWindows(
-        50,
-        40,
-        160,
-        50
-        )
+        LCD1IN8.LCD_Display()
         basic.pause(100)
     }
 })
