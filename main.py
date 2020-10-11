@@ -46,21 +46,9 @@ LCD1IN8.dis_string(50, 50, pitch, LCD1IN8.Get_Color(LCD_COLOR.RED))
 LCD1IN8.dis_string(0, 60, "roll: ", LCD1IN8.Get_Color(LCD_COLOR.BLACK))
 LCD1IN8.dis_string(50, 60, roll, LCD1IN8.Get_Color(LCD_COLOR.RED))
 LCD1IN8.LCD_Display()
-# Poll the light sensor every 100ms and update the display.
-
-def on_in_background():
-    global lumens
-    while True:
-        LCD1IN8.dis_string(50, 0, lumens, LCD1IN8.Get_Color(LCD_COLOR.WHITE))
-        lumens = rightJustifyNumber(input.light_level(), 3)
-        LCD1IN8.dis_string(50, 0, lumens, LCD1IN8.Get_Color(LCD_COLOR.RED))
-        LCD1IN8.LCD_DisplayWindows(50, 0, 90, 10)
-        basic.pause(100)
-control.in_background(on_in_background)
-
 # Poll the temperature sensor every 100ms and update the display
 
-def on_in_background2():
+def on_in_background():
     global temp
     while True:
         LCD1IN8.dis_string(50, 10, temp, LCD1IN8.Get_Color(LCD_COLOR.WHITE))
@@ -68,11 +56,11 @@ def on_in_background2():
         LCD1IN8.dis_string(50, 10, temp, LCD1IN8.Get_Color(LCD_COLOR.RED))
         LCD1IN8.LCD_DisplayWindows(50, 10, 90, 20)
         basic.pause(100)
-control.in_background(on_in_background2)
+control.in_background(on_in_background)
 
 # Poll the magnetometer every 100ms and update the display.
 
-def on_in_background3():
+def on_in_background2():
     global magneticForce
     while True:
         LCD1IN8.dis_string(50, 40, magneticForce, LCD1IN8.Get_Color(LCD_COLOR.WHITE))
@@ -80,12 +68,12 @@ def on_in_background3():
         LCD1IN8.dis_string(50, 40, magneticForce, LCD1IN8.Get_Color(LCD_COLOR.RED))
         LCD1IN8.LCD_DisplayWindows(50, 40, 160, 50)
         basic.pause(100)
-control.in_background(on_in_background3)
+control.in_background(on_in_background2)
 
 # Poll the pitch sensor
 # every 100ms and update the display.
 
-def on_in_background4():
+def on_in_background3():
     global pitch
     while True:
         LCD1IN8.dis_string(50, 50, pitch, LCD1IN8.Get_Color(LCD_COLOR.WHITE))
@@ -93,11 +81,11 @@ def on_in_background4():
         LCD1IN8.dis_string(50, 50, pitch, LCD1IN8.Get_Color(LCD_COLOR.RED))
         LCD1IN8.LCD_DisplayWindows(50, 50, 90, 50)
         basic.pause(100)
-control.in_background(on_in_background4)
+control.in_background(on_in_background3)
 
 # Poll the roll sensor every 100ms and update the display.
 
-def on_in_background5():
+def on_in_background4():
     global roll
     while True:
         LCD1IN8.dis_string(50, 60, roll, LCD1IN8.Get_Color(LCD_COLOR.WHITE))
@@ -105,16 +93,28 @@ def on_in_background5():
         LCD1IN8.dis_string(50, 60, roll, LCD1IN8.Get_Color(LCD_COLOR.RED))
         LCD1IN8.LCD_DisplayWindows(50, 60, 90, 60)
         basic.pause(100)
-control.in_background(on_in_background5)
+control.in_background(on_in_background4)
 
 # Poll the compass every 100ms and update the display.
 
-def on_in_background6():
+def on_in_background5():
     global heading
     while True:
         LCD1IN8.dis_string(50, 30, heading, LCD1IN8.Get_Color(LCD_COLOR.WHITE))
         heading = rightJustifyNumber(input.compass_heading(), 3)
         LCD1IN8.dis_string(50, 30, heading, LCD1IN8.Get_Color(LCD_COLOR.RED))
         LCD1IN8.LCD_DisplayWindows(50, 30, 90, 40)
+        basic.pause(100)
+control.in_background(on_in_background5)
+
+# Poll the light sensor every 100ms and update the display.
+
+def on_in_background6():
+    global lumens
+    while True:
+        LCD1IN8.dis_string(50, 0, lumens, LCD1IN8.Get_Color(LCD_COLOR.WHITE))
+        lumens = rightJustifyNumber(input.light_level(), 3)
+        LCD1IN8.dis_string(50, 0, lumens, LCD1IN8.Get_Color(LCD_COLOR.RED))
+        LCD1IN8.LCD_DisplayWindows(50, 0, 90, 10)
         basic.pause(100)
 control.in_background(on_in_background6)
